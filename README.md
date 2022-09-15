@@ -4,31 +4,12 @@ AliYun RocketMQ Spring Book Edition
 
 [中文](./README_zh_CN.md)
 
-[Thanks for the help from JetBrains software](https://jb.gg/OpenSource)
-
 The project follows the [Apache2.0 License](http://www.apache.org/licenses/)  
 The license is free. You can download the code, modify it as needed, and use it in your own projects  
+When I comply with the Apache 2.0 License, I will not force others to comply with the Apache 2.0 License  
+The donation address is below  
 
-Important: all projects published by the author on GitHub are non-profit.  
-Since the author registered GitHub, so far, he hasn't made a penny.  
-Anyone who charges for the author's project is cheating you.  
-If you are cheated, I hope you can get the help of a lawyer. Good luck.  
-
-IMPORTANT: The author is currently living in a miserable situation with no income and is running out of money.  
-The project still follows the [Apache2.0 License](http://www.apache.org/licenses/)  
-If the author has no money to eat, the author cannot update the project for everyone for free in a place without Internet and life.  
-The author is now accepting donations, thank you for your support.  
-The time to start accepting donations is when this text is currently updated.  
-[Donate](https://www.paypal.com/paypalme/thierrysquirrel)  
-
-IMPORTANT: This project is now out of maintenance, as the author needs to pay to maintain the commercial version while maintaining the project.  
-We spent money maintaining a commercial version today, but couldn't use the product.  
-We have decided to suspend the maintenance or update of all Ali products.  
-Maintainers of open source projects don't pay entrepreneurs to work for free because they disable your account.  
-
-IMPORTANT: Ali decided to sanction me, today I received a text message, he forced me to pay for maintaining Ali products.  
-I paid what I needed to pay yesterday, which is to maintain the Ali product, and then canceled the paid product, but I was sanctioned anyway, and now I have to pay more.  
-Good luck to everyone, don't be sanctioned by Ali.  
+[Donate](https://www.paypal.com/paypalme/thierrysquirrel)
 
 Support function:
 
@@ -240,7 +221,5 @@ public class JacksonSerializer implements RocketSerializer {
 @CommonMessage callback Specify the class
 
 @TransactionMessage checker And executer Specify the class
-
-![Russian flag](https://user-images.githubusercontent.com/49895274/190371709-43606499-86dc-47af-8d93-85ddd1253b64.png)
 
 
