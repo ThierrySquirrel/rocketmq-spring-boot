@@ -4,12 +4,31 @@
 
 [English](./README.md)
 
+[感谢JetBrains软件的帮助](https://jb.gg/OpenSource)
+
 该项目遵循[Apache2.0 License](http://www.apache.org/licenses/)  
 许可证是免费的.您可以下载代码,根据需要进行修改,并在自己的项目中使用它  
-当我遵守Apache2.0 License时不会强迫其他人遵守Apache2.0 License  
-捐款地址在下面  
 
-[捐款](https://www.paypal.com/paypalme/thierrysquirrel)
+重要提示:作者在GitHub上发布的所有项目都是非营利的.  
+自从作者注册GitHub以来,到目前为止,他一分钱也没赚到.  
+任何对作者的项目收费的人都在欺骗你.  
+如果你被骗了,我希望你能得到律师的帮助.祝你好运.
+
+重要提示：作者目前生活在没有收入的悲惨境地,钱也快用完了.  
+项目依然遵循[Apache2.0 License](http://www.apache.org/licenses/)  
+如果作者没钱吃饭,作者无法在没有网络和生活的地方免费为大家更新项目.  
+作者现接受捐款,感谢大家的支持.  
+开始接受捐赠的时间是此文本当前更新的时间.  
+[捐款](https://www.paypal.com/paypalme/thierrysquirrel)  
+
+重要提示：此项目现已停止维护,因为作者在维护项目的同时需要支付维护商业版本的费用.  
+我们今天花了钱维护商业版本，但无法使用该产品.  
+我们决定暂停所有阿里产品的维护或更新.  
+开源项目的维护者不会支付企业家免费工作的费用，因为他们会禁用您的帐户.  
+
+重要提示：阿里决定制裁我，今天我收到一条短信,他强迫我支付维护阿里产品的费用.  
+我昨天支付了我需要支付的费用,也就是维护阿里产品,然后取消了付费产品,但无论如何我都被制裁了,现在我不得不支付更多费用.  
+祝大家好运,不要被阿里制裁.  
 
 支持功能：
 - [x] 普通消息三种发送方式：同步，异步，单向
@@ -222,4 +241,5 @@ public class JacksonSerializer implements RocketSerializer {
 
 @TransactionMessage checker与executer 指定class
 
+![AmericanFlag](https://user-images.githubusercontent.com/49895274/184470801-86f615b1-1b69-4d0c-ad68-41c84549ec40.jpeg)  
 
