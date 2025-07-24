@@ -4,13 +4,6 @@ AliYun RocketMQ Spring Book Edition
 
 [中文](./README_zh_CN.md)
 
-The project follows the [Apache2.0 License](http://www.apache.org/licenses/)  
-The license is free. You can download the code, modify it as needed, and use it in your own projects  
-When I comply with the Apache 2.0 License, I will not force others to comply with the Apache 2.0 License  
-The donation address is below  
-
-[Donate](https://www.paypal.com/paypalme/thierrysquirrel)
-
 Support function:
 
 - [x] Three modes of sending ordinary messages: synchronous, asynchronous and one-way
@@ -46,8 +39,8 @@ To achieve the purpose of delay or timing.
 <!--Adding dependencies to pom. XML-->
         <dependency>
             <artifactId>rocketmq-spring-boot-starter</artifactId>
-            <groupId>com.github.thierrysquirrel</groupId>
-            <version>2.3.1.4-RELEASE</version>
+            <groupId>io.github.thierrysquirrel</groupId>
+            <version>2.4.0.0-RELEASE</version>
         </dependency>
 ```
  ### configuration file
@@ -55,14 +48,14 @@ To achieve the purpose of delay or timing.
  
  ```properties
  ## application.properties
-thierrysquirrel.access-key= #The Access Key you created in the AliYun Account Management Console for authentication
-thierrysquirrel.secret-key= #The SecretKey you created in the AliYun Account Management Console for authentication
-thierrysquirrel.name-srv-addr= #Set up TCP protocol access point and get it from console
+ons.access-key= #Your username in Alibaba Cloud RocketMq machine instance access control
+ons.secret-key= #Your password in Alibaba Cloud RocketMq machine instance access control
+ons.name-srv-addr= #Set up TCP protocol access point and obtain public IP from the console
+ons.namespace= #Actual instance ID used
  ```
 # Start RocketMQ
 ```java
 @SpringBootApplication
-@EnableRocketMQ
 public class DemoApplication{
     public static void main(String[] args){
         SpringApplication.run(DemoApplication.class, args);
@@ -154,9 +147,9 @@ public class Delayed {
 ```
 # Batch Mode
 ```java
-@RocketListener(groupID = "GID_message",batchConsumer = true)
+@RocketListener(groupID = "GID_message")
 public class Delayed {
-	@MessageListener(topic = "message",tag = "message", orderConsumer = true)
+	@MessageListener(topic = "message",tag = "message", batchConsumer = true)
 	public void delayed(String message) {
 		System.out.println("message");
 	}
@@ -222,4 +215,9 @@ public class JacksonSerializer implements RocketSerializer {
 
 @TransactionMessage checker And executer Specify the class
 
+The project follows the [Apache2.0 License](http://www.apache.org/licenses/)  
+The license is free. You can download the code, modify it as needed, and use it in your own projects  
+When I comply with the Apache 2.0 License, I will not force others to comply with the Apache 2.0 License  
+The donation address is below
 
+[Donate](https://www.paypal.com/paypalme/thierrysquirrel)

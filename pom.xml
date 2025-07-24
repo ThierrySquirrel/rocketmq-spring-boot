@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.thierrysquirrel</groupId>
+    <groupId>io.github.thierrysquirrel</groupId>
     <artifactId>rocketmq-spring-boot</artifactId>
     <packaging>pom</packaging>
-    <version>2.3.1.4-RELEASE</version>
+    <version>2.4.0.0-RELEASE</version>
 
     <name>rocketmq-spring-boot</name>
     <description>rocketmq-spring-boot</description>
@@ -16,7 +16,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.3</version>
+        <version>2.7.18</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <modules>
@@ -26,13 +26,14 @@
 
     <properties>
         <java.version>11</java.version>
-        <spring-cloud.version>2021.0.0</spring-cloud.version>
-        <ons-client.version>1.8.8.1.Final</ons-client.version>
-        <guava.version>31.0.1-jre</guava.version>
+        <spring-cloud.version>2021.0.9</spring-cloud.version>
+        <ons-client.version>1.9.6.Final</ons-client.version>
+        <guava.version>33.4.8-jre</guava.version>
         <protostuff-runtime.version>1.7.4</protostuff-runtime.version>
         <protostuff-core.version>1.7.4</protostuff-core.version>
-        <maven-javadoc-plugin.version>3.3.1</maven-javadoc-plugin.version>
-        <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+        <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
+        <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
+        <central-publishing-maven-plugin.version>0.8.0</central-publishing-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -59,13 +60,13 @@
                 <version>${protostuff-core.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.github.thierrysquirrel</groupId>
+                <groupId>io.github.thierrysquirrel</groupId>
                 <artifactId>rocketmq-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.github.thierrysquirrel</groupId>
+                <groupId>io.github.thierrysquirrel</groupId>
                 <artifactId>rocketmq-spring-boot-autoconfigure</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -99,25 +100,11 @@
     </developers>
 
     <scm>
-        <connection>scm:git:https://github.com/ThierrySquirrel/rocketmq-spring-boot-starter.git</connection>
-        <developerConnection>scm:git:https://github.com/ThierrySquirrel/rocketmq-spring-boot-starter.git
-        </developerConnection>
-        <url>https://github.com/ThierrySquirrel/rocketmq-spring-boot-starter</url>
+        <connection>scm:git:https://github.com/ThierrySquirrel/rocketmq-spring-boot.git</connection>
+        <developerConnection>scm:git:https://github.com/ThierrySquirrel/rocketmq-spring-boot.git</developerConnection>
+        <url>https://github.com/ThierrySquirrel/rocketmq-spring-boot</url>
         <tag>v${project.version}</tag>
     </scm>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <name>Maven Central Staging Repository</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
-
 
     <build>
         <plugins>
@@ -154,6 +141,15 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>${central-publishing-maven-plugin.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>ossrh-staging-api</publishingServerId>
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -4,13 +4,6 @@
 
 [English](./README.md)
 
-该项目遵循[Apache2.0 License](http://www.apache.org/licenses/)  
-许可证是免费的.您可以下载代码,根据需要进行修改,并在自己的项目中使用它  
-当我遵守Apache2.0 License时不会强迫其他人遵守Apache2.0 License  
-捐款地址在下面  
-
-[捐款](https://www.paypal.com/paypalme/thierrysquirrel)  
-
 支持功能：
 - [x] 普通消息三种发送方式：同步，异步，单向
 - [x] 订阅消息集群,广播
@@ -45,22 +38,22 @@
 <!--在pom.xml中添加依赖-->
         <dependency>
             <artifactId>rocketmq-spring-boot-starter</artifactId>
-            <groupId>com.github.thierrysquirrel</groupId>
-            <version>2.3.1.4-RELEASE</version>
+            <groupId>io.github.thierrysquirrel</groupId>
+            <version>2.4.0.0-RELEASE</version>
         </dependency>
 ```
  ### 配置文件
  
  ```properties
  ## application.properties
-thierrysquirrel.access-key= #您在阿里云账号管理控制台中创建的 AccessKey，用于身份认证
-thierrysquirrel.secret-key= #您在阿里云账号管理控制台中创建的 SecretKey，用于身份认证
-thierrysquirrel.name-srv-addr= #设置 TCP 协议接入点，从控制台获取
+ons.access-key= #您在阿里云RocketMq机器实例访问控制中的用户名
+ons.secret-key= #您在阿里云RocketMq机器实例访问控制中的密码
+ons.name-srv-addr= #设置TCP协议接入点，并从控制台获取公共IP
+ons.namespace= #实际使用的实例ID
  ```
 # 启动RocketMQ
 ```java
 @SpringBootApplication
-@EnableRocketMQ
 public class DemoApplication{
     public static void main(String[] args){
         SpringApplication.run(DemoApplication.class, args);
@@ -154,9 +147,9 @@ public class Delayed {
 ```
 # 批量模式
 ```java
-@RocketListener(groupID = "GID_message",batchConsumer = true)
+@RocketListener(groupID = "GID_message")
 public class Delayed {
-    @MessageListener(topic = "message",tag = "message", orderConsumer = true)
+    @MessageListener(topic = "message",tag = "message", batchConsumer = true)
     public void delayed(String message) {
             System.out.println("message");
     }
@@ -221,3 +214,10 @@ public class JacksonSerializer implements RocketSerializer {
 @CommonMessage callback指定class
 
 @TransactionMessage checker与executer 指定class
+
+该项目遵循[Apache2.0 License](http://www.apache.org/licenses/)  
+许可证是免费的.您可以下载代码,根据需要进行修改,并在自己的项目中使用它  
+当我遵守Apache2.0 License时不会强迫其他人遵守Apache2.0 License  
+捐款地址在下面
+
+[捐款](https://www.paypal.com/paypalme/thierrysquirrel)  
