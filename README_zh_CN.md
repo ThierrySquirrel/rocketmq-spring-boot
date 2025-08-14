@@ -220,4 +220,4 @@ public class JacksonSerializer implements RocketSerializer {
 当我遵守Apache2.0 License时不会强迫其他人遵守Apache2.0 License  
 捐款地址在下面
 
-[捐款](https://www.paypal.com/paypalme/thierrysquirrel)  
+[捐款](https://thierrysquirrel.github.io/alipay.jpg)  

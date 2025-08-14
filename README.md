@@ -220,4 +220,4 @@ The license is free. You can download the code, modify it as needed, and use it 
 When I comply with the Apache 2.0 License, I will not force others to comply with the Apache 2.0 License  
 The donation address is below
 
-[Donate](https://www.paypal.com/paypalme/thierrysquirrel)
+[Donate](https://thierrysquirrel.github.io/alipay.jpg)
