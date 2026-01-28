@@ -36,39 +36,6 @@ public class ThreadPoolFactory {
 	private ThreadPoolFactory() {
 	}
 
-	public static ThreadPoolExecutor createConsumeThreadPoolExecutor(RocketProperties rocketProperties) {
-		Integer threadNums = rocketProperties.getCreateConsumeThreadNums();
-
-		ThreadFactory threadFactory = new ThreadFactoryBuilder()
-				.setNameFormat("InitializeConsumerListener").build();
-
-		return new ThreadPoolExecutor(threadNums,
-				threadNums,
-				0,
-				TimeUnit.SECONDS,
-				new LinkedBlockingQueue<>(1024),
-				threadFactory,
-				new ThreadPoolExecutor.AbortPolicy()
-		);
-	}
-
-	public static ThreadPoolExecutor createProducerThreadPoolExecutor(RocketProperties rocketProperties) {
-
-		Integer threadNums = rocketProperties.getCreateProducerThreadNums();
-
-		ThreadFactory threadFactory = new ThreadFactoryBuilder()
-				.setNameFormat("InitializeProducer").build();
-
-		return new ThreadPoolExecutor(threadNums,
-				threadNums,
-				0,
-				TimeUnit.SECONDS,
-				new LinkedBlockingQueue<>(1024),
-				threadFactory,
-				new ThreadPoolExecutor.AbortPolicy()
-		);
-	}
-
 	public static ThreadPoolExecutor createSendMessageThreadPoolExecutor(RocketProperties rocketProperties) {
 
 		Integer threadNums = rocketProperties.getSendMessageThreadNums();

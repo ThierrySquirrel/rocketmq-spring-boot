@@ -84,14 +84,6 @@ public class RocketProperties {
      */
     private Integer callbackThreadNums = Runtime.getRuntime().availableProcessors() * 2 + 1;
     /**
-     * 初始化消费者线程数，（尽量和消费者数量一致）默认cpu数量*2+1
-     */
-    private Integer createConsumeThreadNums = Runtime.getRuntime().availableProcessors() * 2 + 1;
-    /**
-     * 初始化生产者线程数，（尽量和生产者数量一致）默认cpu数量*2+1
-     */
-    private Integer createProducerThreadNums = Runtime.getRuntime().availableProcessors() * 2 + 1;
-    /**
      * 生产者发送消息线程数 默认cpu数量*2+1
      */
     private Integer sendMessageThreadNums = Runtime.getRuntime().availableProcessors() * 2 + 1;

@@ -7,7 +7,7 @@
     <groupId>io.github.thierrysquirrel</groupId>
     <artifactId>rocketmq-spring-boot</artifactId>
     <packaging>pom</packaging>
-    <version>2.5.0.0-RELEASE</version>
+    <version>2.5.0.1-RELEASE</version>
 
     <name>rocketmq-spring-boot</name>
     <description>rocketmq-spring-boot</description>
@@ -27,7 +27,7 @@
     <properties>
         <java.version>21</java.version>
         <ons-client.version>1.9.6.Final</ons-client.version>
-        <guava.version>33.4.8-jre</guava.version>
+        <guava.version>33.5.0-jre</guava.version>
         <json.version>1.0.0.0-RELEASE</json.version>
         <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
         <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>

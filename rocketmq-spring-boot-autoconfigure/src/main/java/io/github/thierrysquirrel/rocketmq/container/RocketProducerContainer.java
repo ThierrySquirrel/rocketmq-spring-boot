@@ -18,15 +18,13 @@ package io.github.thierrysquirrel.rocketmq.container;
 
 import io.github.thierrysquirrel.rocketmq.annotation.RocketMessage;
 import io.github.thierrysquirrel.rocketmq.autoconfigure.RocketProperties;
-import io.github.thierrysquirrel.rocketmq.core.factory.ThreadPoolFactory;
 import io.github.thierrysquirrel.rocketmq.core.strategy.RocketConsumerStrategy;
 import jakarta.annotation.PostConstruct;
+import org.jspecify.annotations.NonNull;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.lang.NonNull;
 
 import java.util.Map;
-import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * ClassName: RocketProducerContainer
@@ -48,9 +46,7 @@ public class RocketProducerContainer implements ApplicationContextAware {
 
     @PostConstruct
     public void initialize() {
-        ThreadPoolExecutor threadPoolExecutor = ThreadPoolFactory.createProducerThreadPoolExecutor(rocketProperties);
-        applicationContext.getBeansWithAnnotation(RocketMessage.class).forEach((beanName, bean) -> RocketConsumerStrategy.putProducer(threadPoolExecutor, consumerContainer, bean, rocketProperties, applicationContext));
-        threadPoolExecutor.shutdown();
+        applicationContext.getBeansWithAnnotation(RocketMessage.class).forEach((beanName, bean) -> RocketConsumerStrategy.putProducer(consumerContainer, bean, rocketProperties, applicationContext));
     }
 
 

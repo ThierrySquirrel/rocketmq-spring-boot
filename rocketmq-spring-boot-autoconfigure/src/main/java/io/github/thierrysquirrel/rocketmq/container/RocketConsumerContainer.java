@@ -19,18 +19,14 @@ package io.github.thierrysquirrel.rocketmq.container;
 import io.github.thierrysquirrel.rocketmq.annotation.MessageListener;
 import io.github.thierrysquirrel.rocketmq.annotation.RocketListener;
 import io.github.thierrysquirrel.rocketmq.autoconfigure.RocketProperties;
-import io.github.thierrysquirrel.rocketmq.core.factory.ThreadPoolFactory;
 import io.github.thierrysquirrel.rocketmq.core.factory.execution.ConsumerFactoryExecution;
 import io.github.thierrysquirrel.rocketmq.core.factory.execution.MethodFactoryExecution;
-import io.github.thierrysquirrel.rocketmq.core.factory.execution.ThreadPoolExecutorExecution;
 import io.github.thierrysquirrel.rocketmq.core.serializer.RocketSerializer;
 import io.github.thierrysquirrel.rocketmq.core.utils.AnnotatedMethodsUtils;
 import jakarta.annotation.PostConstruct;
+import org.jspecify.annotations.NonNull;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.lang.NonNull;
-
-import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * ClassName: RocketConsumerContainer
@@ -53,19 +49,16 @@ public class RocketConsumerContainer implements ApplicationContextAware {
 
     @PostConstruct
     public void initialize() {
-        ThreadPoolExecutor threadPoolExecutor = ThreadPoolFactory.createConsumeThreadPoolExecutor(rocketProperties);
-
         applicationContext.getBeansWithAnnotation(RocketListener.class).forEach((beanName, bean) -> {
             RocketListener rocketListener = bean.getClass().getAnnotation(RocketListener.class);
             AnnotatedMethodsUtils.getMethodAndAnnotation(bean, MessageListener.class).
                     forEach((method, consumerListener) -> {
                         ConsumerFactoryExecution consumerFactoryExecution = new ConsumerFactoryExecution(rocketProperties,
                                 rocketListener, consumerListener, new MethodFactoryExecution(bean, method, mqSerializer));
-                        ThreadPoolExecutorExecution.statsThread(threadPoolExecutor, consumerFactoryExecution);
+                        new Thread(consumerFactoryExecution).start();
                     });
         });
 
-        threadPoolExecutor.shutdown();
     }
 
     @Override

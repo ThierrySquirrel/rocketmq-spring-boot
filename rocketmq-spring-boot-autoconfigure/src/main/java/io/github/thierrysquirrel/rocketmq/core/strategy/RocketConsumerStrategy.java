@@ -22,12 +22,10 @@ import io.github.thierrysquirrel.rocketmq.annotation.RocketMessage;
 import io.github.thierrysquirrel.rocketmq.annotation.TransactionMessage;
 import io.github.thierrysquirrel.rocketmq.autoconfigure.RocketProperties;
 import io.github.thierrysquirrel.rocketmq.core.factory.execution.ProducerFactoryExecution;
-import io.github.thierrysquirrel.rocketmq.core.factory.execution.ThreadPoolExecutorExecution;
 import io.github.thierrysquirrel.rocketmq.core.utils.AnnotatedMethodsUtils;
 import org.springframework.context.ApplicationContext;
 
 import java.util.Map;
-import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * ClassName: RocketConsumerStrategy
@@ -42,22 +40,22 @@ public class RocketConsumerStrategy {
 	private RocketConsumerStrategy() {
 	}
 
-	public static void putProducer(ThreadPoolExecutor threadPoolExecutor, Map<String, Object> producerConsumer, Object bean, RocketProperties rocketProperties, ApplicationContext applicationContext) {
+	public static void putProducer(Map<String, Object> producerConsumer, Object bean, RocketProperties rocketProperties, ApplicationContext applicationContext) {
 		RocketMessage rocketMessage = bean.getClass().getAnnotation(RocketMessage.class);
 		AnnotatedMethodsUtils.getMethodAndAnnotation(bean, CommonMessage.class).
 				forEach((method, commonMessage) -> {
 					ProducerFactoryExecution producerFactoryExecution = new ProducerFactoryExecution(producerConsumer, rocketMessage, commonMessage, rocketProperties, applicationContext);
-					ThreadPoolExecutorExecution.statsThread(threadPoolExecutor, producerFactoryExecution);
+					new Thread(producerFactoryExecution).start();
 				});
 		AnnotatedMethodsUtils.getMethodAndAnnotation(bean, OrderMessage.class).
 				forEach((method, orderMessage) -> {
 					ProducerFactoryExecution producerFactoryExecution = new ProducerFactoryExecution(producerConsumer, rocketMessage, orderMessage, rocketProperties, applicationContext);
-					ThreadPoolExecutorExecution.statsThread(threadPoolExecutor, producerFactoryExecution);
+					new  Thread(producerFactoryExecution).start();
 				});
 		AnnotatedMethodsUtils.getMethodAndAnnotation(bean, TransactionMessage.class).
 				forEach((method, transactionMessage) -> {
 					ProducerFactoryExecution producerFactoryExecution = new ProducerFactoryExecution(producerConsumer, rocketMessage, transactionMessage, rocketProperties, applicationContext);
-					ThreadPoolExecutorExecution.statsThread(threadPoolExecutor, producerFactoryExecution);
+					new   Thread(producerFactoryExecution).start();
 				});
 	}
 }

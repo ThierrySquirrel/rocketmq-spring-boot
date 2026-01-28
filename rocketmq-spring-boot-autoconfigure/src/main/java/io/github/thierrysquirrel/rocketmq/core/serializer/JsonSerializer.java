@@ -20,12 +20,12 @@ package io.github.thierrysquirrel.rocketmq.core.serializer;
 import io.github.thierrysquirrel.json.util.JsonUtil;
 
 /**
- * ClassName: ProtoBufSerializer
+ * ClassName: JsonSerializer
  * Description:
- * date: 2019/10/17 18:24
+ * date: 2019/1/28
  *
  * @author ThierrySquirrel
- * @since JDK 1.8
+ * @since JDK 21
  */
 public class JsonSerializer implements RocketSerializer {
 
