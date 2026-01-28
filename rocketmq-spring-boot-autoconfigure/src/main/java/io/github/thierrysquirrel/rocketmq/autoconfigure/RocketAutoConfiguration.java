@@ -19,16 +19,16 @@ package io.github.thierrysquirrel.rocketmq.autoconfigure;
 import io.github.thierrysquirrel.rocketmq.aspect.RocketAspect;
 import io.github.thierrysquirrel.rocketmq.container.RocketConsumerContainer;
 import io.github.thierrysquirrel.rocketmq.container.RocketProducerContainer;
-import io.github.thierrysquirrel.rocketmq.core.serializer.ProtoBufSerializer;
+import io.github.thierrysquirrel.rocketmq.core.serializer.JsonSerializer;
 import io.github.thierrysquirrel.rocketmq.core.serializer.RocketSerializer;
 import com.google.common.collect.Maps;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.Resource;
 import java.util.Map;
 
 
@@ -48,33 +48,34 @@ public class RocketAutoConfiguration {
     private Map<String, Object> consumerContainer;
     @Resource
     private RocketProperties rocketProperties;
+
     @Bean
     @ConditionalOnMissingBean(RocketConsumerContainer.class)
     public RocketConsumerContainer rocketConsumerContainer(@Autowired RocketSerializer rocketSerializer) {
-        return new RocketConsumerContainer (rocketProperties, rocketSerializer);
+        return new RocketConsumerContainer(rocketProperties, rocketSerializer);
     }
 
     @Bean
     @ConditionalOnMissingBean(RocketSerializer.class)
     public RocketSerializer rocketSerializer() {
-        return new ProtoBufSerializer ();
+        return new JsonSerializer();
     }
 
     @Bean
     @ConditionalOnMissingBean(Map.class)
     public Map<String, Object> consumerContainer() {
-        return Maps.newConcurrentMap ();
+        return Maps.newConcurrentMap();
     }
 
     @Bean
     @ConditionalOnMissingBean(RocketProducerContainer.class)
     public RocketProducerContainer rocketProducerContainer() {
-        return new RocketProducerContainer (consumerContainer, rocketProperties);
+        return new RocketProducerContainer(consumerContainer, rocketProperties);
     }
 
     @Bean
     @ConditionalOnMissingBean(RocketAspect.class)
     public RocketAspect rockerAspect() {
-        return new RocketAspect (consumerContainer, rocketProperties);
+        return new RocketAspect(consumerContainer, rocketProperties);
     }
 }

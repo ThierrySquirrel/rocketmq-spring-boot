@@ -20,11 +20,11 @@ import io.github.thierrysquirrel.rocketmq.annotation.RocketMessage;
 import io.github.thierrysquirrel.rocketmq.autoconfigure.RocketProperties;
 import io.github.thierrysquirrel.rocketmq.core.factory.ThreadPoolFactory;
 import io.github.thierrysquirrel.rocketmq.core.strategy.RocketConsumerStrategy;
+import jakarta.annotation.PostConstruct;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.lang.NonNull;
 
-import javax.annotation.PostConstruct;
 import java.util.Map;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -37,25 +37,25 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @since JDK 1.8
  */
 public class RocketProducerContainer implements ApplicationContextAware {
-	private ApplicationContext applicationContext;
-	private final RocketProperties rocketProperties;
-	private final Map<String, Object> consumerContainer;
+    private ApplicationContext applicationContext;
+    private final RocketProperties rocketProperties;
+    private final Map<String, Object> consumerContainer;
 
-	public RocketProducerContainer(Map<String, Object> consumerContainer, RocketProperties rocketProperties) {
-		this.consumerContainer = consumerContainer;
-		this.rocketProperties = rocketProperties;
-	}
+    public RocketProducerContainer(Map<String, Object> consumerContainer, RocketProperties rocketProperties) {
+        this.consumerContainer = consumerContainer;
+        this.rocketProperties = rocketProperties;
+    }
 
-	@PostConstruct
-	public void initialize() {
-		ThreadPoolExecutor threadPoolExecutor = ThreadPoolFactory.createProducerThreadPoolExecutor(rocketProperties);
-		applicationContext.getBeansWithAnnotation(RocketMessage.class).forEach((beanName, bean) -> RocketConsumerStrategy.putProducer(threadPoolExecutor, consumerContainer, bean, rocketProperties, applicationContext));
-		threadPoolExecutor.shutdown();
-	}
+    @PostConstruct
+    public void initialize() {
+        ThreadPoolExecutor threadPoolExecutor = ThreadPoolFactory.createProducerThreadPoolExecutor(rocketProperties);
+        applicationContext.getBeansWithAnnotation(RocketMessage.class).forEach((beanName, bean) -> RocketConsumerStrategy.putProducer(threadPoolExecutor, consumerContainer, bean, rocketProperties, applicationContext));
+        threadPoolExecutor.shutdown();
+    }
 
 
-	@Override
-	public void setApplicationContext(@NonNull ApplicationContext applicationContext) {
-		this.applicationContext = applicationContext;
-	}
+    @Override
+    public void setApplicationContext(@NonNull ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
 }

@@ -7,7 +7,7 @@
     <groupId>io.github.thierrysquirrel</groupId>
     <artifactId>rocketmq-spring-boot</artifactId>
     <packaging>pom</packaging>
-    <version>2.4.0.0-RELEASE</version>
+    <version>2.5.0.0-RELEASE</version>
 
     <name>rocketmq-spring-boot</name>
     <description>rocketmq-spring-boot</description>
@@ -16,7 +16,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.18</version>
+        <version>4.0.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <modules>
@@ -25,15 +25,13 @@
     </modules>
 
     <properties>
-        <java.version>11</java.version>
-        <spring-cloud.version>2021.0.9</spring-cloud.version>
+        <java.version>21</java.version>
         <ons-client.version>1.9.6.Final</ons-client.version>
         <guava.version>33.4.8-jre</guava.version>
-        <protostuff-runtime.version>1.7.4</protostuff-runtime.version>
-        <protostuff-core.version>1.7.4</protostuff-core.version>
-        <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
+        <json.version>1.0.0.0-RELEASE</json.version>
+        <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
         <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
-        <central-publishing-maven-plugin.version>0.8.0</central-publishing-maven-plugin.version>
+        <central-publishing-maven-plugin.version>0.10.0</central-publishing-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -50,33 +48,19 @@
                 <version>${guava.version}</version>
             </dependency>
             <dependency>
-                <groupId>io.protostuff</groupId>
-                <artifactId>protostuff-runtime</artifactId>
-                <version>${protostuff-runtime.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.protostuff</groupId>
-                <artifactId>protostuff-core</artifactId>
-                <version>${protostuff-core.version}</version>
+                <groupId>io.github.thierrysquirrel</groupId>
+                <artifactId>json</artifactId>
+                <version>${json.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.thierrysquirrel</groupId>
                 <artifactId>rocketmq-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>io.github.thierrysquirrel</groupId>
                 <artifactId>rocketmq-spring-boot-autoconfigure</artifactId>
                 <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

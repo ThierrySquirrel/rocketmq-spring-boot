@@ -1,6 +1,8 @@
 # rocketmq-spring-boot-starter
 
-AliYun RocketMQ Spring Book Edition
+AliYun RocketMQ-5X Spring Book4X Edition
+
+To quickly integrate with the Alibaba Cloud Tongyi Big Model series (Qwen, Tongyi Wanxiang, Lingma, etc.), the data format defaults to Json  
 
 [中文](./README_zh_CN.md)
 
@@ -40,7 +42,7 @@ To achieve the purpose of delay or timing.
         <dependency>
             <artifactId>rocketmq-spring-boot-starter</artifactId>
             <groupId>io.github.thierrysquirrel</groupId>
-            <version>2.4.0.0-RELEASE</version>
+            <version>2.5.0.0-RELEASE</version>
         </dependency>
 ```
  ### configuration file
@@ -116,7 +118,7 @@ public class Transaction {
 @RestController
 @RocketMessage(groupID = "GID_delayed")
 public class Delayed {
-    //startDeliverTime is the time stamp, which cannot be less than the current time
+    //RocketMq-5X: StartDeliverTime in milliseconds
     @GetMapping("/delayed")
     @CommonMessage(topic = "delayed", tag = "delayed")
     public String delayed(@StartDeliverTime @RequestParam("startDeliverTime") long startDeliverTime) {

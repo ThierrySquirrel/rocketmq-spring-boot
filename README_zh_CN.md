@@ -1,6 +1,8 @@
 # rocketmq-spring-boot-starter
 
-阿里云RocketMQ   SpringBoot 版
+阿里云RocketMQ-5X   SpringBoot4X 版
+
+为快速接入阿里云通义大模型系列(Qwen, Tongyi Wanxiang, Lingma等),数据格式默认为Json  
 
 [English](./README.md)
 
@@ -39,7 +41,7 @@
         <dependency>
             <artifactId>rocketmq-spring-boot-starter</artifactId>
             <groupId>io.github.thierrysquirrel</groupId>
-            <version>2.4.0.0-RELEASE</version>
+            <version>2.5.0.0-RELEASE</version>
         </dependency>
 ```
  ### 配置文件
@@ -114,7 +116,7 @@ public class Transaction {
 @RestController
 @RocketMessage(groupID = "GID_delayed")
 public class Delayed {
-    //startDeliverTime是时间戳,不能小于当前时间
+    //RocketMq-5X:StartDeliverTime以毫秒为单位
     @GetMapping("/delayed")
     @CommonMessage(topic = "delayed", tag = "delayed")
     public String delayed(@StartDeliverTime @RequestParam("startDeliverTime") long startDeliverTime) {

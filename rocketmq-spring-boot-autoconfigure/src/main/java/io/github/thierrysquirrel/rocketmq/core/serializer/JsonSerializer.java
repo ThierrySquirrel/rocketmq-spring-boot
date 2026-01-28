@@ -16,10 +16,8 @@
 
 package io.github.thierrysquirrel.rocketmq.core.serializer;
 
-import io.protostuff.LinkedBuffer;
-import io.protostuff.ProtobufIOUtil;
-import io.protostuff.Schema;
-import io.protostuff.runtime.RuntimeSchema;
+
+import io.github.thierrysquirrel.json.util.JsonUtil;
 
 /**
  * ClassName: ProtoBufSerializer
@@ -29,20 +27,23 @@ import io.protostuff.runtime.RuntimeSchema;
  * @author ThierrySquirrel
  * @since JDK 1.8
  */
-public class ProtoBufSerializer implements RocketSerializer {
+public class JsonSerializer implements RocketSerializer {
 
     @Override
-    @SuppressWarnings("unchecked")
     public <T> byte[] serialize(T object) {
-        Schema<T> schema = (Schema<T>) RuntimeSchema.getSchema (object.getClass ());
-        return ProtobufIOUtil.toByteArray (object, schema, LinkedBuffer.allocate (LinkedBuffer.DEFAULT_BUFFER_SIZE));
+        String typeName = object.getClass().getTypeName();
+        if (typeName.equals(String.class.getTypeName())) {
+            return ((String) object).getBytes();
+        }
+        return JsonUtil.toJson(object).getBytes();
     }
 
     @Override
     public <T> T deSerialize(byte[] bytes, Class<T> clazz) {
-        RuntimeSchema<T> runtimeSchema = RuntimeSchema.createFrom (clazz);
-        T object = runtimeSchema.newMessage ();
-        ProtobufIOUtil.mergeFrom (bytes, object, runtimeSchema);
-        return object;
+        String typeName = clazz.getTypeName();
+        if (typeName.equals(String.class.getTypeName())) {
+            return (T) new String(bytes);
+        }
+        return JsonUtil.deSerialize(new String(bytes), clazz);
     }
 }
