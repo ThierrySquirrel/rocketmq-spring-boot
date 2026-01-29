@@ -35,33 +35,33 @@ import java.lang.annotation.*;
 @Inherited
 @Documented
 public @interface CommonMessage {
-	/**
-	 * Message 所属的 Topic
-	 *
-	 * @return String
-	 */
-	String topic() default "";
+    /**
+     * Message 所属的 Topic
+     *
+     * @return String
+     */
+    String topic() default "";
 
-	/**
-	 * 订阅指定 Topic 下的 Tags：
-	 * 1. * 表示订阅所有消息
-	 * 2. TagA || TagB || TagC 表示订阅 TagA 或 TagB 或 TagC 的消息
-	 *
-	 * @return String
-	 */
-	String tag() default "*";
+    /**
+     * 订阅指定 Topic 下的 Tags：
+     * 1. * 表示订阅所有消息
+     * 2. TagA || TagB || TagC 表示订阅 TagA 或 TagB 或 TagC 的消息
+     *
+     * @return String
+     */
+    String tag() default "*";
 
-	/**
-	 * 消息发送类型 默认异步
-	 *
-	 * @return MessageSendType
-	 */
-	MessageSendType messageSendType() default MessageSendType.SEND_ASYNC;
+    /**
+     * 消息发送类型 默认异步
+     *
+     * @return MessageSendType
+     */
+    MessageSendType messageSendType() default MessageSendType.SEND_ASYNC;
 
-	/**
-	 * 自定义SendCallback类
-	 *
-	 * @return callback
-	 */
-	Class<? extends SendCallback> callback() default DefaultSendCallback.class;
+    /**
+     * 自定义SendCallback类
+     *
+     * @return callback
+     */
+    Class<? extends SendCallback> callback() default DefaultSendCallback.class;
 }

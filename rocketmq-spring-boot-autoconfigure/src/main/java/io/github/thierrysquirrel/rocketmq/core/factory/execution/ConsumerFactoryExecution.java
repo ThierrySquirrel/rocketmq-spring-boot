@@ -44,7 +44,7 @@ public class ConsumerFactoryExecution extends AbstractConsumerThread {
 
 
     public ConsumerFactoryExecution(RocketProperties rocketProperties, RocketListener rocketListener, MessageListener consumerListener, MethodFactoryExecution methodFactoryExecution) {
-        super (rocketProperties, rocketListener, consumerListener, methodFactoryExecution);
+        super(rocketProperties, rocketListener, consumerListener, methodFactoryExecution);
     }
 
     @Override
@@ -53,25 +53,25 @@ public class ConsumerFactoryExecution extends AbstractConsumerThread {
                               MessageListener consumerListener,
                               MethodFactoryExecution methodFactoryExecution) {
 
-        Properties properties = ConsumerPropertiesFactory.createConsumerProperties (rocketProperties, rocketListener);
-        if (consumerListener.orderConsumer ()) {
-            properties.put (PropertyKeyConst.SuspendTimeMillis, rocketProperties.getSuspendTimeMilli ());
-            OrderConsumer orderConsumer = ConsumerFactory.createOrderConsumer (properties);
-            orderConsumer.subscribe (consumerListener.topic (), consumerListener.tag (), new DefaultMessageOrderListener (methodFactoryExecution));
-            orderConsumer.start ();
+        Properties properties = ConsumerPropertiesFactory.createConsumerProperties(rocketProperties, rocketListener);
+        if (consumerListener.orderConsumer()) {
+            properties.put(PropertyKeyConst.SuspendTimeMillis, rocketProperties.getSuspendTimeMilli());
+            OrderConsumer orderConsumer = ConsumerFactory.createOrderConsumer(properties);
+            orderConsumer.subscribe(consumerListener.topic(), consumerListener.tag(), new DefaultMessageOrderListener(methodFactoryExecution));
+            orderConsumer.start();
             return;
         }
-        if (consumerListener.batchConsumer ()) {
-            properties.put (PropertyKeyConst.ConsumeMessageBatchMaxSize, consumerListener.consumeMessageBatchMaxSize ());
-            properties.put (PropertyKeyConst.BatchConsumeMaxAwaitDurationInSeconds, consumerListener.batchConsumeMaxAwaitDurationInSeconds ());
-            BatchConsumer batchConsumer = ConsumerFactory.createBatchConsumer (properties);
-            batchConsumer.subscribe (consumerListener.topic (), consumerListener.tag (), new DefaultBatchMessageListener (methodFactoryExecution));
-            batchConsumer.start ();
+        if (consumerListener.batchConsumer()) {
+            properties.put(PropertyKeyConst.ConsumeMessageBatchMaxSize, consumerListener.consumeMessageBatchMaxSize());
+            properties.put(PropertyKeyConst.BatchConsumeMaxAwaitDurationInSeconds, consumerListener.batchConsumeMaxAwaitDurationInSeconds());
+            BatchConsumer batchConsumer = ConsumerFactory.createBatchConsumer(properties);
+            batchConsumer.subscribe(consumerListener.topic(), consumerListener.tag(), new DefaultBatchMessageListener(methodFactoryExecution));
+            batchConsumer.start();
             return;
         }
 
-        Consumer consumer = ConsumerFactory.createConsumer (properties);
-        consumer.subscribe (consumerListener.topic (), consumerListener.tag (), new DefaultMessageListener (methodFactoryExecution));
-        consumer.start ();
+        Consumer consumer = ConsumerFactory.createConsumer(properties);
+        consumer.subscribe(consumerListener.topic(), consumerListener.tag(), new DefaultMessageListener(methodFactoryExecution));
+        consumer.start();
     }
 }

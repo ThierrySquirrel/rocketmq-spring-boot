@@ -17,8 +17,9 @@
 package io.github.thierrysquirrel.rocketmq.core.consumer;
 
 import io.github.thierrysquirrel.rocketmq.core.factory.execution.MethodFactoryExecution;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * ClassName: AbstractRocketListener
@@ -28,20 +29,26 @@ import lombok.extern.slf4j.Slf4j;
  * @author ThierrySquirrel
  * @since JDK 1.8
  */
-@Data
-@Slf4j
 public abstract class AbstractRocketListener {
-	private MethodFactoryExecution methodFactoryExecution;
-
-	protected AbstractRocketListener(MethodFactoryExecution methodFactoryExecution) {
-		this.methodFactoryExecution = methodFactoryExecution;
-	}
-
-	public void printErrorLog() {
-		log.error("Consumer agent failed！bean:{},method:{}",
-				methodFactoryExecution.getBean(),
-				methodFactoryExecution.getMethod());
-	}
+    private static final Logger logger = Logger.getLogger(AbstractRocketListener.class.getName());
 
 
+    private MethodFactoryExecution methodFactoryExecution;
+
+    protected AbstractRocketListener(MethodFactoryExecution methodFactoryExecution) {
+        this.methodFactoryExecution = methodFactoryExecution;
+    }
+
+    public void printErrorLog() {
+        String logMsg = "Consumer agent failed！bean:" + methodFactoryExecution.getBean();
+        logger.log(Level.WARNING, logMsg);
+    }
+
+    public MethodFactoryExecution getMethodFactoryExecution() {
+        return methodFactoryExecution;
+    }
+
+    public void setMethodFactoryExecution(MethodFactoryExecution methodFactoryExecution) {
+        this.methodFactoryExecution = methodFactoryExecution;
+    }
 }

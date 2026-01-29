@@ -45,20 +45,20 @@ public class ProducerStrategy {
     public static void statsSendMessage(Long startDeliverTime, String shardingKeyFactory, Map<String, Object> consumerContainer, RocketMessage rocketMessage, Object message, byte[] bytes, ApplicationContext applicationContex) throws RocketException {
         if (message instanceof CommonMessage) {
             CommonMessage commonMessage = (CommonMessage) message;
-            Producer producer = ProducerConsumerFactory.getProducer (consumerContainer, rocketMessage, commonMessage);
-            SendMessageFactory.sendMessage (startDeliverTime, producer, commonMessage, bytes, applicationContex);
+            Producer producer = ProducerConsumerFactory.getProducer(consumerContainer, rocketMessage, commonMessage);
+            SendMessageFactory.sendMessage(startDeliverTime, producer, commonMessage, bytes, applicationContex);
             return;
         }
         if (message instanceof OrderMessage) {
             OrderMessage orderMessage = (OrderMessage) message;
-            OrderProducer orderProducer = ProducerConsumerFactory.getProducer (consumerContainer, rocketMessage, orderMessage);
-            SendMessageFactory.sendMessage (orderProducer, orderMessage, bytes, shardingKeyFactory);
+            OrderProducer orderProducer = ProducerConsumerFactory.getProducer(consumerContainer, rocketMessage, orderMessage);
+            SendMessageFactory.sendMessage(orderProducer, orderMessage, bytes, shardingKeyFactory);
             return;
         }
         if (message instanceof TransactionMessage) {
             TransactionMessage transactionMessage = (TransactionMessage) message;
-            TransactionProducer transactionProducer = ProducerConsumerFactory.getProducer (consumerContainer, rocketMessage, transactionMessage);
-            SendMessageFactory.sendMessage (transactionProducer, transactionMessage, bytes, applicationContex);
+            TransactionProducer transactionProducer = ProducerConsumerFactory.getProducer(consumerContainer, rocketMessage, transactionMessage);
+            SendMessageFactory.sendMessage(transactionProducer, transactionMessage, bytes, applicationContex);
         }
     }
 }

@@ -34,21 +34,21 @@ import java.util.Map;
  */
 public class ProducerFactoryExecution extends AbstractProducerThread {
 
-	public ProducerFactoryExecution(Map<String, Object> producerConsumer, RocketMessage rocketMessage, Object bean, RocketProperties rocketProperties, ApplicationContext applicationContext) {
-		super(producerConsumer, rocketMessage, bean, rocketProperties, applicationContext);
-	}
+    public ProducerFactoryExecution(Map<String, Object> producerConsumer, RocketMessage rocketMessage, Object bean, RocketProperties rocketProperties, ApplicationContext applicationContext) {
+        super(producerConsumer, rocketMessage, bean, rocketProperties, applicationContext);
+    }
 
-	/**
-	 * 开始向容器装填
-	 *
-	 * @param producerConsumer   producerConsumer
-	 * @param rocketMessage      rocketMessage
-	 * @param bean               bean
-	 * @param rocketProperties   rocketProperties
-	 * @param applicationContext applicationContext
-	 */
-	@Override
-	protected void statsPutProducer(Map<String, Object> producerConsumer, RocketMessage rocketMessage, Object bean, RocketProperties rocketProperties, ApplicationContext applicationContext) {
-		PutProducerStrategy.putProducer(producerConsumer, rocketMessage, bean, rocketProperties, applicationContext);
-	}
+    /**
+     * 开始向容器装填
+     *
+     * @param producerConsumer   producerConsumer
+     * @param rocketMessage      rocketMessage
+     * @param bean               bean
+     * @param rocketProperties   rocketProperties
+     * @param applicationContext applicationContext
+     */
+    @Override
+    protected void statsPutProducer(Map<String, Object> producerConsumer, RocketMessage rocketMessage, Object bean, RocketProperties rocketProperties, ApplicationContext applicationContext) {
+        PutProducerStrategy.putProducer(producerConsumer, rocketMessage, bean, rocketProperties, applicationContext);
+    }
 }

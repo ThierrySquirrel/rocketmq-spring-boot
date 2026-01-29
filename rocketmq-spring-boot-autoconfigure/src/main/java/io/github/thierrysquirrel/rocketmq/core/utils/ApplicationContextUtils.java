@@ -34,36 +34,36 @@ import org.springframework.context.ApplicationContext;
  * @since JDK 1.8
  */
 public class ApplicationContextUtils {
-	private ApplicationContextUtils() {
-	}
+    private ApplicationContextUtils() {
+    }
 
-	public static SendCallback getSendCallback(ApplicationContext applicationContext, Class<? extends SendCallback> callback) {
-		SendCallback sendCallback;
-		if (DefaultSendCallback.class.equals(callback)) {
-			sendCallback = new DefaultSendCallback();
-		} else {
-			sendCallback = applicationContext.getBean(callback);
-		}
-		return sendCallback;
-	}
+    public static SendCallback getSendCallback(ApplicationContext applicationContext, Class<? extends SendCallback> callback) {
+        SendCallback sendCallback;
+        if (DefaultSendCallback.class.equals(callback)) {
+            sendCallback = new DefaultSendCallback();
+        } else {
+            sendCallback = applicationContext.getBean(callback);
+        }
+        return sendCallback;
+    }
 
-	public static LocalTransactionChecker getLocalTransactionChecker(ApplicationContext applicationContext, TransactionStatus transactionStatus, Class<? extends LocalTransactionChecker> checker) {
-		LocalTransactionChecker localTransactionChecker;
-		if (DefaultLocalTransactionChecker.class.equals(checker)) {
-			localTransactionChecker = new DefaultLocalTransactionChecker(transactionStatus);
-		} else {
-			localTransactionChecker = applicationContext.getBean(checker);
-		}
-		return localTransactionChecker;
-	}
+    public static LocalTransactionChecker getLocalTransactionChecker(ApplicationContext applicationContext, TransactionStatus transactionStatus, Class<? extends LocalTransactionChecker> checker) {
+        LocalTransactionChecker localTransactionChecker;
+        if (DefaultLocalTransactionChecker.class.equals(checker)) {
+            localTransactionChecker = new DefaultLocalTransactionChecker(transactionStatus);
+        } else {
+            localTransactionChecker = applicationContext.getBean(checker);
+        }
+        return localTransactionChecker;
+    }
 
-	public static LocalTransactionExecuter getLocalTransactionExecuter(ApplicationContext applicationContext, Class<? extends LocalTransactionExecuter> executer) {
-		LocalTransactionExecuter localTransactionExecuter;
-		if (DefaultLocalTransactionExecuter.class.equals(executer)) {
-			localTransactionExecuter = new DefaultLocalTransactionExecuter();
-		} else {
-			localTransactionExecuter = applicationContext.getBean(executer);
-		}
-		return localTransactionExecuter;
-	}
+    public static LocalTransactionExecuter getLocalTransactionExecuter(ApplicationContext applicationContext, Class<? extends LocalTransactionExecuter> executer) {
+        LocalTransactionExecuter localTransactionExecuter;
+        if (DefaultLocalTransactionExecuter.class.equals(executer)) {
+            localTransactionExecuter = new DefaultLocalTransactionExecuter();
+        } else {
+            localTransactionExecuter = applicationContext.getBean(executer);
+        }
+        return localTransactionExecuter;
+    }
 }

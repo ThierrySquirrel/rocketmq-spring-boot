@@ -16,7 +16,6 @@
 
 package io.github.thierrysquirrel.rocketmq.autoconfigure;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 
@@ -28,7 +27,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author ThierrySquirrel
  * @since JDK 1.8
  */
-@Data
 @ConfigurationProperties(prefix = RocketProperties.ROCKET_PREFIX)
 public class RocketProperties {
 
@@ -88,5 +86,126 @@ public class RocketProperties {
      */
     private Integer sendMessageThreadNums = Runtime.getRuntime().availableProcessors() * 2 + 1;
 
+    public String getNameSrvAddr() {
+        return nameSrvAddr;
+    }
 
+    public void setNameSrvAddr(String nameSrvAddr) {
+        this.nameSrvAddr = nameSrvAddr;
+    }
+
+    public String getNamespace() {
+        return namespace;
+    }
+
+    public void setNamespace(String namespace) {
+        this.namespace = namespace;
+    }
+
+    public String getAccessKey() {
+        return accessKey;
+    }
+
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
+    }
+
+    public String getOnsChannel() {
+        return onsChannel;
+    }
+
+    public void setOnsChannel(String onsChannel) {
+        this.onsChannel = onsChannel;
+    }
+
+    public Integer getSendMsgTimeoutMillis() {
+        return sendMsgTimeoutMillis;
+    }
+
+    public void setSendMsgTimeoutMillis(Integer sendMsgTimeoutMillis) {
+        this.sendMsgTimeoutMillis = sendMsgTimeoutMillis;
+    }
+
+    public Integer getCheckImmunityTimeInSeconds() {
+        return checkImmunityTimeInSeconds;
+    }
+
+    public void setCheckImmunityTimeInSeconds(Integer checkImmunityTimeInSeconds) {
+        this.checkImmunityTimeInSeconds = checkImmunityTimeInSeconds;
+    }
+
+    public Integer getConsumeThreadNums() {
+        return consumeThreadNums;
+    }
+
+    public void setConsumeThreadNums(Integer consumeThreadNums) {
+        this.consumeThreadNums = consumeThreadNums;
+    }
+
+    public Integer getMaxReconsumeTimes() {
+        return maxReconsumeTimes;
+    }
+
+    public void setMaxReconsumeTimes(Integer maxReconsumeTimes) {
+        this.maxReconsumeTimes = maxReconsumeTimes;
+    }
+
+    public Integer getConsumeTimeout() {
+        return consumeTimeout;
+    }
+
+    public void setConsumeTimeout(Integer consumeTimeout) {
+        this.consumeTimeout = consumeTimeout;
+    }
+
+    public Integer getSuspendTimeMilli() {
+        return suspendTimeMilli;
+    }
+
+    public void setSuspendTimeMilli(Integer suspendTimeMilli) {
+        this.suspendTimeMilli = suspendTimeMilli;
+    }
+
+    public Integer getCallbackThreadNums() {
+        return callbackThreadNums;
+    }
+
+    public void setCallbackThreadNums(Integer callbackThreadNums) {
+        this.callbackThreadNums = callbackThreadNums;
+    }
+
+    public Integer getSendMessageThreadNums() {
+        return sendMessageThreadNums;
+    }
+
+    public void setSendMessageThreadNums(Integer sendMessageThreadNums) {
+        this.sendMessageThreadNums = sendMessageThreadNums;
+    }
+
+    @Override
+    public String toString() {
+        return "RocketProperties{" +
+                "nameSrvAddr='" + nameSrvAddr + '\'' +
+                ", namespace='" + namespace + '\'' +
+                ", accessKey='" + accessKey + '\'' +
+                ", secretKey='" + secretKey + '\'' +
+                ", onsChannel='" + onsChannel + '\'' +
+                ", sendMsgTimeoutMillis=" + sendMsgTimeoutMillis +
+                ", checkImmunityTimeInSeconds=" + checkImmunityTimeInSeconds +
+                ", consumeThreadNums=" + consumeThreadNums +
+                ", maxReconsumeTimes=" + maxReconsumeTimes +
+                ", consumeTimeout=" + consumeTimeout +
+                ", suspendTimeMilli=" + suspendTimeMilli +
+                ", callbackThreadNums=" + callbackThreadNums +
+                ", sendMessageThreadNums=" + sendMessageThreadNums +
+                '}';
+    }
 }

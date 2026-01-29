@@ -34,11 +34,11 @@ import java.lang.annotation.*;
 @Component
 @Documented
 public @interface RocketMessage {
-	/**
-	 * 您在控制台创建的 Group ID
-	 *
-	 * @return String
-	 */
-	String groupID() default "";
+    /**
+     * 您在控制台创建的 Group ID
+     *
+     * @return String
+     */
+    String groupID() default "";
 
 }

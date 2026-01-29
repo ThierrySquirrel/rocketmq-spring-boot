@@ -22,7 +22,6 @@ import com.aliyun.openservices.ons.api.order.MessageOrderListener;
 import com.aliyun.openservices.ons.api.order.OrderAction;
 import io.github.thierrysquirrel.rocketmq.core.factory.execution.MethodFactoryExecution;
 import io.github.thierrysquirrel.rocketmq.error.RocketException;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * ClassName: DefaultMessageOrderListener
@@ -33,12 +32,11 @@ import lombok.extern.slf4j.Slf4j;
  * @since JDK 1.8
  */
 
-@Slf4j
 public class DefaultMessageOrderListener extends AbstractRocketListener implements MessageOrderListener {
 
 
     public DefaultMessageOrderListener(MethodFactoryExecution methodFactoryExecution) {
-        super (methodFactoryExecution);
+        super(methodFactoryExecution);
     }
 
     /**
@@ -52,11 +50,10 @@ public class DefaultMessageOrderListener extends AbstractRocketListener implemen
      */
     @Override
     public OrderAction consume(Message message, ConsumeOrderContext context) {
-        log.info (">>>> Order message:{}>>>>", message);
         try {
-            super.getMethodFactoryExecution ().methodExecution (message.getBody ());
+            super.getMethodFactoryExecution().methodExecution(message.getBody());
         } catch (RocketException e) {
-            super.printErrorLog ();
+            super.printErrorLog();
             return OrderAction.Suspend;
         }
         return OrderAction.Success;

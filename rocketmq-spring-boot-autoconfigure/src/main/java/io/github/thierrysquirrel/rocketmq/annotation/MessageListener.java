@@ -34,44 +34,44 @@ import java.lang.annotation.*;
 @Documented
 @Component
 public @interface MessageListener {
-	/**
-	 * Message 所属的 Topic
-	 *
-	 * @return String
-	 */
-	String topic() default "";
+    /**
+     * Message 所属的 Topic
+     *
+     * @return String
+     */
+    String topic() default "";
 
-	/**
-	 * 订阅指定 Topic 下的 Tags：
-	 * 1. * 表示订阅所有消息
-	 * 2. TagA || TagB || TagC 表示订阅 TagA 或 TagB 或 TagC 的消息
-	 *
-	 * @return String
-	 */
-	String tag() default "*";
+    /**
+     * 订阅指定 Topic 下的 Tags：
+     * 1. * 表示订阅所有消息
+     * 2. TagA || TagB || TagC 表示订阅 TagA 或 TagB 或 TagC 的消息
+     *
+     * @return String
+     */
+    String tag() default "*";
 
-	/**
-	 * 是否为顺序消息
-	 *
-	 * @return Boolean
-	 */
+    /**
+     * 是否为顺序消息
+     *
+     * @return Boolean
+     */
 
-	boolean orderConsumer() default false;
+    boolean orderConsumer() default false;
 
-	/**
-	 * 是否为批量消息
-	 *
-	 * @return Boolean
-	 */
-	boolean batchConsumer() default false;
+    /**
+     * 是否为批量消息
+     *
+     * @return Boolean
+     */
+    boolean batchConsumer() default false;
 
-	/**
-	 * 设置批量消费最大消息数量,当指定Topic的消息数量已经攒够128条,SDK立即执行回调进行消费.默认值：32,取值范围：1~1024.
-	 */
-	int consumeMessageBatchMaxSize() default 32;
+    /**
+     * 设置批量消费最大消息数量,当指定Topic的消息数量已经攒够128条,SDK立即执行回调进行消费.默认值：32,取值范围：1~1024.
+     */
+    int consumeMessageBatchMaxSize() default 32;
 
-	/**
-	 * 设置批量消费最大等待时长,当等待时间达到10秒,SDK立即执行回调进行消费.默认值：0,取值范围：0~450,单位：秒.
-	 */
-	int batchConsumeMaxAwaitDurationInSeconds() default 0;
+    /**
+     * 设置批量消费最大等待时长,当等待时间达到10秒,SDK立即执行回调进行消费.默认值：0,取值范围：0~450,单位：秒.
+     */
+    int batchConsumeMaxAwaitDurationInSeconds() default 0;
 }

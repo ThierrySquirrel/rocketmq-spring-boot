@@ -35,19 +35,19 @@ import java.lang.annotation.*;
 @Documented
 @Component
 public @interface RocketListener {
-	/**
-	 * 您在控制台创建的 Group ID
-	 *
-	 * @return String
-	 */
-	String groupID() default "";
+    /**
+     * 您在控制台创建的 Group ID
+     *
+     * @return String
+     */
+    String groupID() default "";
 
-	/**
-	 * 消费模式，默认集群消费
-	 *
-	 * @return String
-	 */
-	String messageModel() default PropertyValueConst.CLUSTERING;
+    /**
+     * 消费模式，默认集群消费
+     *
+     * @return String
+     */
+    String messageModel() default PropertyValueConst.CLUSTERING;
 
 
 }

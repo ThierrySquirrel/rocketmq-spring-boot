@@ -43,35 +43,35 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @since JDK 1.8
  */
 public class PutProducerStrategy {
-	private PutProducerStrategy() {
-	}
+    private PutProducerStrategy() {
+    }
 
-	public static void putProducer(Map<String, Object> producerConsumer, RocketMessage rocketMessage, Object bean, RocketProperties rocketProperties, ApplicationContext applicationContext) {
-		if (bean instanceof CommonMessage) {
-			CommonMessage commonMessage = (CommonMessage) bean;
-			String producerConsumerKey = ProducerConsumerFactory.getProducerConsumerKey(rocketMessage, commonMessage);
-			Producer producer = ProducerFactory.createProducer(rocketMessage, rocketProperties);
-			ThreadPoolExecutor callbackThreadPoolExecutor = ThreadPoolFactory.createCallbackThreadPoolExecutor(rocketProperties);
-			producer.start();
-			producer.setCallbackExecutor(callbackThreadPoolExecutor);
-			producerConsumer.put(producerConsumerKey, producer);
-			return;
-		}
-		if (bean instanceof OrderMessage) {
-			OrderMessage orderMessage = (OrderMessage) bean;
-			String producerConsumerKey = ProducerConsumerFactory.getProducerConsumerKey(rocketMessage, orderMessage);
-			OrderProducer orderProducer = ProducerFactory.createOrderProducer(rocketMessage, rocketProperties);
-			orderProducer.start();
-			producerConsumer.put(producerConsumerKey, orderProducer);
-			return;
-		}
-		if (bean instanceof TransactionMessage) {
-			TransactionMessage transactionMessage = (TransactionMessage) bean;
-			String producerConsumerKey = ProducerConsumerFactory.getProducerConsumerKey(rocketMessage, transactionMessage);
-			LocalTransactionChecker localTransactionChecker = ApplicationContextUtils.getLocalTransactionChecker(applicationContext, transactionMessage.transactionStatus(),transactionMessage.checker());
-			TransactionProducer transactionProducer = ProducerFactory.createTransactionProducer(rocketMessage, rocketProperties, localTransactionChecker);
-			transactionProducer.start();
-			producerConsumer.put(producerConsumerKey, transactionProducer);
-		}
-	}
+    public static void putProducer(Map<String, Object> producerConsumer, RocketMessage rocketMessage, Object bean, RocketProperties rocketProperties, ApplicationContext applicationContext) {
+        if (bean instanceof CommonMessage) {
+            CommonMessage commonMessage = (CommonMessage) bean;
+            String producerConsumerKey = ProducerConsumerFactory.getProducerConsumerKey(rocketMessage, commonMessage);
+            Producer producer = ProducerFactory.createProducer(rocketMessage, rocketProperties);
+            ThreadPoolExecutor callbackThreadPoolExecutor = ThreadPoolFactory.createCallbackThreadPoolExecutor(rocketProperties);
+            producer.start();
+            producer.setCallbackExecutor(callbackThreadPoolExecutor);
+            producerConsumer.put(producerConsumerKey, producer);
+            return;
+        }
+        if (bean instanceof OrderMessage) {
+            OrderMessage orderMessage = (OrderMessage) bean;
+            String producerConsumerKey = ProducerConsumerFactory.getProducerConsumerKey(rocketMessage, orderMessage);
+            OrderProducer orderProducer = ProducerFactory.createOrderProducer(rocketMessage, rocketProperties);
+            orderProducer.start();
+            producerConsumer.put(producerConsumerKey, orderProducer);
+            return;
+        }
+        if (bean instanceof TransactionMessage) {
+            TransactionMessage transactionMessage = (TransactionMessage) bean;
+            String producerConsumerKey = ProducerConsumerFactory.getProducerConsumerKey(rocketMessage, transactionMessage);
+            LocalTransactionChecker localTransactionChecker = ApplicationContextUtils.getLocalTransactionChecker(applicationContext, transactionMessage.transactionStatus(), transactionMessage.checker());
+            TransactionProducer transactionProducer = ProducerFactory.createTransactionProducer(rocketMessage, rocketProperties, localTransactionChecker);
+            transactionProducer.start();
+            producerConsumer.put(producerConsumerKey, transactionProducer);
+        }
+    }
 }

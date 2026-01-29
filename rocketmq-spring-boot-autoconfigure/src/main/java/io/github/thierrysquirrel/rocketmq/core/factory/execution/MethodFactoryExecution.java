@@ -19,8 +19,6 @@ package io.github.thierrysquirrel.rocketmq.core.factory.execution;
 import io.github.thierrysquirrel.rocketmq.core.factory.MethodFactory;
 import io.github.thierrysquirrel.rocketmq.core.serializer.RocketSerializer;
 import io.github.thierrysquirrel.rocketmq.error.RocketException;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
 
@@ -32,8 +30,6 @@ import java.lang.reflect.Method;
  * @author ThierrySquirrel
  * @since JDK 1.8
  */
-@Data
-@Slf4j
 public class MethodFactoryExecution {
     private Object bean;
     private Method method;
@@ -47,11 +43,44 @@ public class MethodFactoryExecution {
 
     public void methodExecution(byte[] message) throws RocketException {
         try {
-            Class<?> methodParameter = MethodFactory.getMethodParameter (method);
-            Object methodParameterBean = rocketSerializer.deSerialize (message, methodParameter);
-            method.invoke (bean, methodParameterBean);
+            Class<?> methodParameter = MethodFactory.getMethodParameter(method);
+            Object methodParameterBean = rocketSerializer.deSerialize(message, methodParameter);
+            method.invoke(bean, methodParameterBean);
         } catch (Exception e) {
-            throw new RocketException (e);
+            throw new RocketException(e);
         }
+    }
+
+    public Object getBean() {
+        return bean;
+    }
+
+    public void setBean(Object bean) {
+        this.bean = bean;
+    }
+
+    public Method getMethod() {
+        return method;
+    }
+
+    public void setMethod(Method method) {
+        this.method = method;
+    }
+
+    public RocketSerializer getRocketSerializer() {
+        return rocketSerializer;
+    }
+
+    public void setRocketSerializer(RocketSerializer rocketSerializer) {
+        this.rocketSerializer = rocketSerializer;
+    }
+
+    @Override
+    public String toString() {
+        return "MethodFactoryExecution{" +
+                "bean=" + bean +
+                ", method=" + method +
+                ", rocketSerializer=" + rocketSerializer +
+                '}';
     }
 }

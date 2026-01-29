@@ -20,7 +20,6 @@ import io.github.thierrysquirrel.rocketmq.annotation.MessageListener;
 import io.github.thierrysquirrel.rocketmq.annotation.RocketListener;
 import io.github.thierrysquirrel.rocketmq.autoconfigure.RocketProperties;
 import io.github.thierrysquirrel.rocketmq.core.factory.execution.MethodFactoryExecution;
-import lombok.Data;
 
 /**
  * ClassName: AbstractConsumerThread
@@ -30,38 +29,79 @@ import lombok.Data;
  * @author ThierrySquirrel
  * @since JDK 1.8
  */
-@Data
 public abstract class AbstractConsumerThread implements Runnable {
-	private RocketProperties rocketProperties;
-	private RocketListener rocketListener;
-	private MessageListener consumerListener;
-	private MethodFactoryExecution methodFactoryExecution;
+    private RocketProperties rocketProperties;
+    private RocketListener rocketListener;
+    private MessageListener consumerListener;
+    private MethodFactoryExecution methodFactoryExecution;
 
-	protected AbstractConsumerThread(RocketProperties rocketProperties, RocketListener rocketListener, MessageListener consumerListener, MethodFactoryExecution methodFactoryExecution) {
-		this.rocketProperties = rocketProperties;
-		this.rocketListener = rocketListener;
-		this.consumerListener = consumerListener;
-		this.methodFactoryExecution = methodFactoryExecution;
-	}
+    protected AbstractConsumerThread(RocketProperties rocketProperties, RocketListener rocketListener, MessageListener consumerListener, MethodFactoryExecution methodFactoryExecution) {
+        this.rocketProperties = rocketProperties;
+        this.rocketListener = rocketListener;
+        this.consumerListener = consumerListener;
+        this.methodFactoryExecution = methodFactoryExecution;
+    }
 
-	/**
-	 * 消费者开始监听
-	 *
-	 * @param rocketProperties       rocketProperties
-	 * @param rocketListener         rocketListener
-	 * @param consumerListener       consumerListener
-	 * @param methodFactoryExecution methodFactoryExecution
-	 */
-	protected abstract void statsConsumer(RocketProperties rocketProperties,
-	                                      RocketListener rocketListener,
-	                                      MessageListener consumerListener,
-	                                      MethodFactoryExecution methodFactoryExecution);
+    /**
+     * 消费者开始监听
+     *
+     * @param rocketProperties       rocketProperties
+     * @param rocketListener         rocketListener
+     * @param consumerListener       consumerListener
+     * @param methodFactoryExecution methodFactoryExecution
+     */
+    protected abstract void statsConsumer(RocketProperties rocketProperties,
+                                          RocketListener rocketListener,
+                                          MessageListener consumerListener,
+                                          MethodFactoryExecution methodFactoryExecution);
 
-	@Override
-	public void run() {
-		statsConsumer(this.getRocketProperties(),
-				this.getRocketListener(),
-				this.getConsumerListener(),
-				this.getMethodFactoryExecution());
-	}
+    @Override
+    public void run() {
+        statsConsumer(this.getRocketProperties(),
+                this.getRocketListener(),
+                this.getConsumerListener(),
+                this.getMethodFactoryExecution());
+    }
+
+    public RocketProperties getRocketProperties() {
+        return rocketProperties;
+    }
+
+    public void setRocketProperties(RocketProperties rocketProperties) {
+        this.rocketProperties = rocketProperties;
+    }
+
+    public RocketListener getRocketListener() {
+        return rocketListener;
+    }
+
+    public void setRocketListener(RocketListener rocketListener) {
+        this.rocketListener = rocketListener;
+    }
+
+    public MessageListener getConsumerListener() {
+        return consumerListener;
+    }
+
+    public void setConsumerListener(MessageListener consumerListener) {
+        this.consumerListener = consumerListener;
+    }
+
+    public MethodFactoryExecution getMethodFactoryExecution() {
+        return methodFactoryExecution;
+    }
+
+    public void setMethodFactoryExecution(MethodFactoryExecution methodFactoryExecution) {
+        this.methodFactoryExecution = methodFactoryExecution;
+    }
+
+    @Override
+    public String toString() {
+        return "AbstractConsumerThread{" +
+                "rocketProperties=" + rocketProperties +
+                ", rocketListener=" + rocketListener +
+                ", consumerListener=" + consumerListener +
+                ", methodFactoryExecution=" + methodFactoryExecution +
+                '}';
+    }
 }

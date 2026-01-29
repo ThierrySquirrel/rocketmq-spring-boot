@@ -26,8 +26,6 @@ import io.github.thierrysquirrel.rocketmq.core.factory.StartDeliverTimeFactory;
 import io.github.thierrysquirrel.rocketmq.core.factory.ThreadPoolFactory;
 import io.github.thierrysquirrel.rocketmq.core.utils.AspectUtils;
 import io.github.thierrysquirrel.rocketmq.core.utils.InterceptRocket;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -38,6 +36,8 @@ import org.springframework.context.ApplicationContextAware;
 
 import java.util.Map;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * ClassName: RocketAspect
@@ -48,9 +48,9 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @since JDK 1.8
  */
 @Aspect
-@Slf4j
-@Data
 public class RocketAspect implements ApplicationContextAware {
+    private static final Logger logger = Logger.getLogger(RocketAspect.class.getName());
+
     private Map<String, Object> consumerContainer;
     private RocketProperties rocketProperties;
     private ThreadPoolExecutor threadPoolExecutor;
@@ -59,32 +59,35 @@ public class RocketAspect implements ApplicationContextAware {
     public RocketAspect(Map<String, Object> consumerContainer, RocketProperties rocketProperties) {
         this.consumerContainer = consumerContainer;
         this.rocketProperties = rocketProperties;
-        this.threadPoolExecutor = ThreadPoolFactory.createSendMessageThreadPoolExecutor (rocketProperties);
+        this.threadPoolExecutor = ThreadPoolFactory.createSendMessageThreadPoolExecutor(rocketProperties);
     }
 
     @Pointcut("@annotation(io.github.thierrysquirrel.rocketmq.annotation.CommonMessage)")
     public void commonMessagePointcut() {
-        log.debug ("Start sending CommonMessage");
+        String logMsg = "Start sending CommonMessage";
+        logger.log(Level.INFO, logMsg);
     }
 
     @Pointcut("@annotation(io.github.thierrysquirrel.rocketmq.annotation.OrderMessage)")
     public void orderMessagePointcut() {
-        log.debug ("Start sending OrderMessage");
+        String logMsg = "Start sending OrderMessage";
+        logger.log(Level.INFO, logMsg);
     }
 
     @Pointcut("@annotation(io.github.thierrysquirrel.rocketmq.annotation.TransactionMessage)")
     public void transactionMessagePointcut() {
-        log.debug ("Start sending TransactionMessage");
+        String logMsg = "Start sending TransactionMessage";
+        logger.log(Level.INFO, logMsg);
     }
 
     @Around("commonMessagePointcut()")
     public Object rockerMessageSend(ProceedingJoinPoint point) throws Throwable {
-        return InterceptRocket.intercept (
-                StartDeliverTimeFactory.getStartDeliverTime (point.getArgs (), AspectUtils.getParams (point)),
-                ShardingKeyFactory.getShardingKeyFactory (point.getArgs (), AspectUtils.getParams (point)),
-                AspectUtils.getDeclaringClassAnnotation (point, RocketMessage.class),
-                AspectUtils.getAnnotation (point, CommonMessage.class),
-                point.proceed (),
+        return InterceptRocket.intercept(
+                StartDeliverTimeFactory.getStartDeliverTime(point.getArgs(), AspectUtils.getParams(point)),
+                ShardingKeyFactory.getShardingKeyFactory(point.getArgs(), AspectUtils.getParams(point)),
+                AspectUtils.getDeclaringClassAnnotation(point, RocketMessage.class),
+                AspectUtils.getAnnotation(point, CommonMessage.class),
+                point.proceed(),
                 consumerContainer,
                 threadPoolExecutor,
                 applicationContext);
@@ -92,12 +95,12 @@ public class RocketAspect implements ApplicationContextAware {
 
     @Around("orderMessagePointcut()")
     public Object orderMessageSend(ProceedingJoinPoint point) throws Throwable {
-        return InterceptRocket.intercept (
-                StartDeliverTimeFactory.getStartDeliverTime (point.getArgs (), AspectUtils.getParams (point)),
-                ShardingKeyFactory.getShardingKeyFactory (point.getArgs (), AspectUtils.getParams (point)),
-                AspectUtils.getDeclaringClassAnnotation (point, RocketMessage.class),
-                AspectUtils.getAnnotation (point, OrderMessage.class),
-                point.proceed (),
+        return InterceptRocket.intercept(
+                StartDeliverTimeFactory.getStartDeliverTime(point.getArgs(), AspectUtils.getParams(point)),
+                ShardingKeyFactory.getShardingKeyFactory(point.getArgs(), AspectUtils.getParams(point)),
+                AspectUtils.getDeclaringClassAnnotation(point, RocketMessage.class),
+                AspectUtils.getAnnotation(point, OrderMessage.class),
+                point.proceed(),
                 consumerContainer,
                 threadPoolExecutor,
                 applicationContext);
@@ -105,12 +108,12 @@ public class RocketAspect implements ApplicationContextAware {
 
     @Around("transactionMessagePointcut()")
     public Object transactionMessageSend(ProceedingJoinPoint point) throws Throwable {
-        return InterceptRocket.intercept (
-                StartDeliverTimeFactory.getStartDeliverTime (point.getArgs (), AspectUtils.getParams (point)),
-                ShardingKeyFactory.getShardingKeyFactory (point.getArgs (), AspectUtils.getParams (point)),
-                AspectUtils.getDeclaringClassAnnotation (point, RocketMessage.class),
-                AspectUtils.getAnnotation (point, TransactionMessage.class),
-                point.proceed (),
+        return InterceptRocket.intercept(
+                StartDeliverTimeFactory.getStartDeliverTime(point.getArgs(), AspectUtils.getParams(point)),
+                ShardingKeyFactory.getShardingKeyFactory(point.getArgs(), AspectUtils.getParams(point)),
+                AspectUtils.getDeclaringClassAnnotation(point, RocketMessage.class),
+                AspectUtils.getAnnotation(point, TransactionMessage.class),
+                point.proceed(),
                 consumerContainer,
                 threadPoolExecutor,
                 applicationContext);
@@ -119,5 +122,43 @@ public class RocketAspect implements ApplicationContextAware {
     @Override
     public void setApplicationContext(@NonNull ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
+    }
+
+    public Map<String, Object> getConsumerContainer() {
+        return consumerContainer;
+    }
+
+    public void setConsumerContainer(Map<String, Object> consumerContainer) {
+        this.consumerContainer = consumerContainer;
+    }
+
+    public RocketProperties getRocketProperties() {
+        return rocketProperties;
+    }
+
+    public void setRocketProperties(RocketProperties rocketProperties) {
+        this.rocketProperties = rocketProperties;
+    }
+
+    public ThreadPoolExecutor getThreadPoolExecutor() {
+        return threadPoolExecutor;
+    }
+
+    public void setThreadPoolExecutor(ThreadPoolExecutor threadPoolExecutor) {
+        this.threadPoolExecutor = threadPoolExecutor;
+    }
+
+    public ApplicationContext getApplicationContext() {
+        return applicationContext;
+    }
+
+    @Override
+    public String toString() {
+        return "RocketAspect{" +
+                "consumerContainer=" + consumerContainer +
+                ", rocketProperties=" + rocketProperties +
+                ", threadPoolExecutor=" + threadPoolExecutor +
+                ", applicationContext=" + applicationContext +
+                '}';
     }
 }

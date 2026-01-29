@@ -39,10 +39,10 @@ public class InterceptRocket {
     }
 
     public static <T extends Annotation> Object intercept(Long startDeliverTime, String shardingKeyFactory, RocketMessage rocketMessage, T annotation, Object proceed, Map<String, Object> consumerContainer, ThreadPoolExecutor threadPoolExecutor, ApplicationContext applicationContext) {
-        RocketSerializer mqSerializer = applicationContext.getBean (RocketSerializer.class);
-        byte[] body = mqSerializer.serialize (proceed);
+        RocketSerializer mqSerializer = applicationContext.getBean(RocketSerializer.class);
+        byte[] body = mqSerializer.serialize(proceed);
 
-        ThreadPoolExecutorExecution.statsThread (threadPoolExecutor, new SendMessageFactoryExecution (startDeliverTime, shardingKeyFactory, consumerContainer, rocketMessage, annotation, body, applicationContext));
+        ThreadPoolExecutorExecution.statsThread(threadPoolExecutor, new SendMessageFactoryExecution(startDeliverTime, shardingKeyFactory, consumerContainer, rocketMessage, annotation, body, applicationContext));
         return proceed;
     }
 }

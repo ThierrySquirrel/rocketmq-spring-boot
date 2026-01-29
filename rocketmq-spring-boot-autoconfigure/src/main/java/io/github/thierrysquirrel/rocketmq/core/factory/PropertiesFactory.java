@@ -30,17 +30,17 @@ import java.util.Properties;
  * @since JDK 1.8
  */
 public class PropertiesFactory {
-	private PropertiesFactory() {
-	}
+    private PropertiesFactory() {
+    }
 
-	public static Properties createProperties(RocketProperties rocketProperties) {
-		Properties properties = new Properties();
-		properties.put(PropertyKeyConst.NAMESRV_ADDR, rocketProperties.getNameSrvAddr());
-		properties.put(PropertyKeyConst.Namespace, rocketProperties.getNamespace());
-		properties.put(PropertyKeyConst.AccessKey, rocketProperties.getAccessKey());
-		properties.put(PropertyKeyConst.SecretKey, rocketProperties.getSecretKey());
-		properties.put(PropertyKeyConst.OnsChannel, rocketProperties.getOnsChannel());
+    public static Properties createProperties(RocketProperties rocketProperties) {
+        Properties properties = new Properties();
+        properties.put(PropertyKeyConst.NAMESRV_ADDR, rocketProperties.getNameSrvAddr());
+        properties.put(PropertyKeyConst.Namespace, rocketProperties.getNamespace());
+        properties.put(PropertyKeyConst.AccessKey, rocketProperties.getAccessKey());
+        properties.put(PropertyKeyConst.SecretKey, rocketProperties.getSecretKey());
+        properties.put(PropertyKeyConst.OnsChannel, rocketProperties.getOnsChannel());
 
-		return properties;
-	}
+        return properties;
+    }
 }

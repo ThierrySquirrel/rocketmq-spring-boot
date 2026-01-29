@@ -27,14 +27,14 @@ import org.springframework.util.ObjectUtils;
  * @since JDK 1.8
  */
 public class ObjectIsEmptyUtils {
-	private ObjectIsEmptyUtils() {
-	}
+    private ObjectIsEmptyUtils() {
+    }
 
-	public static boolean isEmpty(Object obj) {
-		return ObjectUtils.isEmpty(obj);
-	}
+    public static boolean isEmpty(Object obj) {
+        return ObjectUtils.isEmpty(obj);
+    }
 
-	public static boolean isNotEmpty(Object obj) {
-		return !isEmpty(obj);
-	}
+    public static boolean isNotEmpty(Object obj) {
+        return !isEmpty(obj);
+    }
 }

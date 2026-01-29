@@ -31,14 +31,14 @@ import java.util.Properties;
  * @since JDK 1.8
  */
 public class ProducerPropertiesFactory {
-	private ProducerPropertiesFactory() {
-	}
+    private ProducerPropertiesFactory() {
+    }
 
-	public static Properties createProducerProperties(RocketMessage rockerMessage, RocketProperties rocketProperties) {
-		Properties properties = PropertiesFactory.createProperties(rocketProperties);
-		properties.put(PropertyKeyConst.SendMsgTimeoutMillis, rocketProperties.getSendMsgTimeoutMillis());
-		properties.put(PropertyKeyConst.GROUP_ID, rockerMessage.groupID());
-		return properties;
-	}
+    public static Properties createProducerProperties(RocketMessage rockerMessage, RocketProperties rocketProperties) {
+        Properties properties = PropertiesFactory.createProperties(rocketProperties);
+        properties.put(PropertyKeyConst.SendMsgTimeoutMillis, rocketProperties.getSendMsgTimeoutMillis());
+        properties.put(PropertyKeyConst.GROUP_ID, rockerMessage.groupID());
+        return properties;
+    }
 
 }

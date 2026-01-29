@@ -25,17 +25,17 @@ package io.github.thierrysquirrel.rocketmq.core.producer;
  * @since JDK 1.8
  */
 public enum MessageSendType {
-	/**
-	 * 同步发送
-	 */
-	SEND,
-	/**
-	 * 异步发送
-	 */
-	SEND_ASYNC,
-	/**
-	 * 单向发送
-	 */
-	SEND_ONE_WAY
+    /**
+     * 同步发送
+     */
+    SEND,
+    /**
+     * 异步发送
+     */
+    SEND_ASYNC,
+    /**
+     * 单向发送
+     */
+    SEND_ONE_WAY
 
 }

@@ -32,12 +32,12 @@ import java.util.Map;
  * @since JDK 1.8
  */
 public class AnnotatedMethodsUtils {
-	private AnnotatedMethodsUtils() {
-	}
+    private AnnotatedMethodsUtils() {
+    }
 
-	public static <T extends Annotation> Map<Method, T> getMethodAndAnnotation(Object bean, Class<T> annotation) {
-		return MethodIntrospector.selectMethods(bean.getClass(),
-				(MethodIntrospector.MetadataLookup<T>) method -> AnnotatedElementUtils
-						.findMergedAnnotation(method, annotation));
-	}
+    public static <T extends Annotation> Map<Method, T> getMethodAndAnnotation(Object bean, Class<T> annotation) {
+        return MethodIntrospector.selectMethods(bean.getClass(),
+                (MethodIntrospector.MetadataLookup<T>) method -> AnnotatedElementUtils
+                        .findMergedAnnotation(method, annotation));
+    }
 }

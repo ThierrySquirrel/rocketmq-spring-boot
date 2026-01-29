@@ -36,8 +36,8 @@ public class StartDeliverTimeFactory {
 
     public static Long getStartDeliverTime(Object[] args, Parameter[] params) {
         for (int i = 0; i < args.length; i++) {
-            StartDeliverTime annotation = params[i].getAnnotation (StartDeliverTime.class);
-            if (ObjectIsEmptyUtils.isNotEmpty (annotation)) {
+            StartDeliverTime annotation = params[i].getAnnotation(StartDeliverTime.class);
+            if (ObjectIsEmptyUtils.isNotEmpty(annotation)) {
                 return (Long) args[i];
             }
         }

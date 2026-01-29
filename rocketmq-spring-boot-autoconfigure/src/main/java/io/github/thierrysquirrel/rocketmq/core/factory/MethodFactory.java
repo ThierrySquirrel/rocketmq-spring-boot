@@ -28,10 +28,10 @@ import java.lang.reflect.Method;
  */
 
 public class MethodFactory {
-	private MethodFactory() {
-	}
+    private MethodFactory() {
+    }
 
-	public static Class<?> getMethodParameter(Method method) {
-		return method.getParameterTypes()[0];
-	}
+    public static Class<?> getMethodParameter(Method method) {
+        return method.getParameterTypes()[0];
+    }
 }

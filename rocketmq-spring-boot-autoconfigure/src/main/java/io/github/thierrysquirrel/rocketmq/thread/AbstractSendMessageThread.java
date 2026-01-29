@@ -17,9 +17,9 @@
 package io.github.thierrysquirrel.rocketmq.thread;
 
 import io.github.thierrysquirrel.rocketmq.annotation.RocketMessage;
-import lombok.Data;
 import org.springframework.context.ApplicationContext;
 
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -30,7 +30,6 @@ import java.util.Map;
  * @author ThierrySquirrel
  * @since JDK 1.8
  */
-@Data
 public abstract class AbstractSendMessageThread implements Runnable {
     private Long startDeliverTime;
     private String shardingKeyFactory;
@@ -65,10 +64,79 @@ public abstract class AbstractSendMessageThread implements Runnable {
 
     @Override
     public void run() {
-        statsSendMessage (startDeliverTime, shardingKeyFactory, consumerContainer,
+        statsSendMessage(startDeliverTime, shardingKeyFactory, consumerContainer,
                 rocketMessage,
                 message,
                 bytes,
                 applicationContext);
+    }
+
+    public Long getStartDeliverTime() {
+        return startDeliverTime;
+    }
+
+    public void setStartDeliverTime(Long startDeliverTime) {
+        this.startDeliverTime = startDeliverTime;
+    }
+
+    public String getShardingKeyFactory() {
+        return shardingKeyFactory;
+    }
+
+    public void setShardingKeyFactory(String shardingKeyFactory) {
+        this.shardingKeyFactory = shardingKeyFactory;
+    }
+
+    public Map<String, Object> getConsumerContainer() {
+        return consumerContainer;
+    }
+
+    public void setConsumerContainer(Map<String, Object> consumerContainer) {
+        this.consumerContainer = consumerContainer;
+    }
+
+    public RocketMessage getRocketMessage() {
+        return rocketMessage;
+    }
+
+    public void setRocketMessage(RocketMessage rocketMessage) {
+        this.rocketMessage = rocketMessage;
+    }
+
+    public Object getMessage() {
+        return message;
+    }
+
+    public void setMessage(Object message) {
+        this.message = message;
+    }
+
+    public byte[] getBytes() {
+        return bytes;
+    }
+
+    public void setBytes(byte[] bytes) {
+        this.bytes = bytes;
+    }
+
+    public ApplicationContext getApplicationContext() {
+        return applicationContext;
+    }
+
+    public void setApplicationContext(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
+
+    @Override
+    public String toString() {
+        return "AbstractSendMessageThread{" +
+                "startDeliverTime=" + startDeliverTime +
+                ", shardingKeyFactory='" + shardingKeyFactory + '\'' +
+                ", consumerContainer=" + consumerContainer +
+                ", rocketMessage=" + rocketMessage +
+                ", message=" + message +
+                ", bytes=" + Arrays.toString(bytes) +
+                ", applicationContext=" + applicationContext +
+                '}';
     }
 }

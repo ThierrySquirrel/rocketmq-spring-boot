@@ -37,25 +37,25 @@ import java.util.Map;
  */
 
 public class RocketConsumerStrategy {
-	private RocketConsumerStrategy() {
-	}
+    private RocketConsumerStrategy() {
+    }
 
-	public static void putProducer(Map<String, Object> producerConsumer, Object bean, RocketProperties rocketProperties, ApplicationContext applicationContext) {
-		RocketMessage rocketMessage = bean.getClass().getAnnotation(RocketMessage.class);
-		AnnotatedMethodsUtils.getMethodAndAnnotation(bean, CommonMessage.class).
-				forEach((method, commonMessage) -> {
-					ProducerFactoryExecution producerFactoryExecution = new ProducerFactoryExecution(producerConsumer, rocketMessage, commonMessage, rocketProperties, applicationContext);
-					new Thread(producerFactoryExecution).start();
-				});
-		AnnotatedMethodsUtils.getMethodAndAnnotation(bean, OrderMessage.class).
-				forEach((method, orderMessage) -> {
-					ProducerFactoryExecution producerFactoryExecution = new ProducerFactoryExecution(producerConsumer, rocketMessage, orderMessage, rocketProperties, applicationContext);
-					new  Thread(producerFactoryExecution).start();
-				});
-		AnnotatedMethodsUtils.getMethodAndAnnotation(bean, TransactionMessage.class).
-				forEach((method, transactionMessage) -> {
-					ProducerFactoryExecution producerFactoryExecution = new ProducerFactoryExecution(producerConsumer, rocketMessage, transactionMessage, rocketProperties, applicationContext);
-					new   Thread(producerFactoryExecution).start();
-				});
-	}
+    public static void putProducer(Map<String, Object> producerConsumer, Object bean, RocketProperties rocketProperties, ApplicationContext applicationContext) {
+        RocketMessage rocketMessage = bean.getClass().getAnnotation(RocketMessage.class);
+        AnnotatedMethodsUtils.getMethodAndAnnotation(bean, CommonMessage.class).
+                forEach((method, commonMessage) -> {
+                    ProducerFactoryExecution producerFactoryExecution = new ProducerFactoryExecution(producerConsumer, rocketMessage, commonMessage, rocketProperties, applicationContext);
+                    new Thread(producerFactoryExecution).start();
+                });
+        AnnotatedMethodsUtils.getMethodAndAnnotation(bean, OrderMessage.class).
+                forEach((method, orderMessage) -> {
+                    ProducerFactoryExecution producerFactoryExecution = new ProducerFactoryExecution(producerConsumer, rocketMessage, orderMessage, rocketProperties, applicationContext);
+                    new Thread(producerFactoryExecution).start();
+                });
+        AnnotatedMethodsUtils.getMethodAndAnnotation(bean, TransactionMessage.class).
+                forEach((method, transactionMessage) -> {
+                    ProducerFactoryExecution producerFactoryExecution = new ProducerFactoryExecution(producerConsumer, rocketMessage, transactionMessage, rocketProperties, applicationContext);
+                    new Thread(producerFactoryExecution).start();
+                });
+    }
 }

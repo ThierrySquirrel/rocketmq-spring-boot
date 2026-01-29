@@ -33,19 +33,19 @@ import java.util.Properties;
  * @since JDK 1.8
  */
 public class ConsumerFactory {
-	private ConsumerFactory() {
-	}
+    private ConsumerFactory() {
+    }
 
-	public static Consumer createConsumer(Properties properties) {
-		return ONSFactory.createConsumer(properties);
-	}
+    public static Consumer createConsumer(Properties properties) {
+        return ONSFactory.createConsumer(properties);
+    }
 
 
-	public static OrderConsumer createOrderConsumer(Properties properties) {
-		return ONSFactory.createOrderedConsumer(properties);
-	}
+    public static OrderConsumer createOrderConsumer(Properties properties) {
+        return ONSFactory.createOrderedConsumer(properties);
+    }
 
-	public static BatchConsumer createBatchConsumer(Properties properties) {
-		return ONSFactory.createBatchConsumer(properties);
-	}
+    public static BatchConsumer createBatchConsumer(Properties properties) {
+        return ONSFactory.createBatchConsumer(properties);
+    }
 }

@@ -34,8 +34,8 @@ public class ShardingKeyFactory {
 
     public static String getShardingKeyFactory(Object[] args, Parameter[] params) {
         for (int i = 0; i < args.length; i++) {
-            ShardingKey annotation = params[i].getAnnotation (ShardingKey.class);
-            if (ObjectIsEmptyUtils.isNotEmpty (annotation)) {
+            ShardingKey annotation = params[i].getAnnotation(ShardingKey.class);
+            if (ObjectIsEmptyUtils.isNotEmpty(annotation)) {
                 return (String) args[i];
             }
         }

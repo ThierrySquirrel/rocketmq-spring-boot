@@ -21,10 +21,11 @@ import io.github.thierrysquirrel.rocketmq.annotation.RocketMessage;
 import io.github.thierrysquirrel.rocketmq.core.strategy.ProducerStrategy;
 import io.github.thierrysquirrel.rocketmq.error.RocketException;
 import io.github.thierrysquirrel.rocketmq.thread.AbstractSendMessageThread;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -35,12 +36,12 @@ import java.util.Map;
  * @author ThierrySquirrel
  * @since JDK 1.8
  */
-@Slf4j
 public class SendMessageFactoryExecution extends AbstractSendMessageThread {
+    private static final Logger logger = Logger.getLogger(SendMessageFactoryExecution.class.getName());
 
 
     public SendMessageFactoryExecution(Long startDeliverTime, String shardingKeyFactory, Map<String, Object> consumerContainer, RocketMessage rocketMessage, Object message, byte[] bytes, ApplicationContext applicationContext) {
-        super (startDeliverTime, shardingKeyFactory, consumerContainer, rocketMessage, message, bytes, applicationContext);
+        super(startDeliverTime, shardingKeyFactory, consumerContainer, rocketMessage, message, bytes, applicationContext);
     }
 
     /**
@@ -57,9 +58,10 @@ public class SendMessageFactoryExecution extends AbstractSendMessageThread {
     @Override
     protected void statsSendMessage(Long startDeliverTime, String shardingKeyFactory, Map<String, Object> consumerContainer, RocketMessage rocketMessage, Object message, byte[] bytes, ApplicationContext applicationContext) {
         try {
-            ProducerStrategy.statsSendMessage (startDeliverTime, shardingKeyFactory,consumerContainer, rocketMessage, message, bytes, applicationContext);
+            ProducerStrategy.statsSendMessage(startDeliverTime, shardingKeyFactory, consumerContainer, rocketMessage, message, bytes, applicationContext);
         } catch (RocketException e) {
-            log.error ("statsSendMessage Error", e);
+            String logMsg = "statsSendMessage Error";
+            logger.log(Level.WARNING, logMsg, e);
         }
     }
 }

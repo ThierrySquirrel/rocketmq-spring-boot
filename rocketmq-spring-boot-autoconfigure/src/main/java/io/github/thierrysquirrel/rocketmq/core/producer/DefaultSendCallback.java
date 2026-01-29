@@ -19,7 +19,9 @@ package io.github.thierrysquirrel.rocketmq.core.producer;
 import com.aliyun.openservices.ons.api.OnExceptionContext;
 import com.aliyun.openservices.ons.api.SendCallback;
 import com.aliyun.openservices.ons.api.SendResult;
-import lombok.extern.slf4j.Slf4j;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * ClassName: DefaultSendCallback
@@ -29,25 +31,27 @@ import lombok.extern.slf4j.Slf4j;
  * @author ThierrySquirrel
  * @since JDK 1.8
  */
-@Slf4j
 public class DefaultSendCallback implements SendCallback {
-	/**
-	 * 发送成功回调的方法.
-	 *
-	 * @param sendResult 发送结果
-	 */
-	@Override
-	public void onSuccess(SendResult sendResult) {
-		log.info("Message sent successfully sendResult{}", sendResult);
-	}
+    private static final Logger logger = Logger.getLogger(DefaultSendCallback.class.getName());
 
-	/**
-	 * 发送失败回调方法.
-	 *
-	 * @param context 失败上下文.
-	 */
-	@Override
-	public void onException(OnExceptionContext context) {
-		log.error("Failed to send message context{}", context);
-	}
+
+    /**
+     * 发送成功回调的方法.
+     *
+     * @param sendResult 发送结果
+     */
+    @Override
+    public void onSuccess(SendResult sendResult) {
+    }
+
+    /**
+     * 发送失败回调方法.
+     *
+     * @param context 失败上下文.
+     */
+    @Override
+    public void onException(OnExceptionContext context) {
+        String logMsg = "Failed to send message context::" + context.toString();
+        logger.log(Level.WARNING, logMsg);
+    }
 }

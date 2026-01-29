@@ -22,7 +22,6 @@ import com.aliyun.openservices.ons.api.Message;
 import com.aliyun.openservices.ons.api.MessageListener;
 import io.github.thierrysquirrel.rocketmq.core.factory.execution.MethodFactoryExecution;
 import io.github.thierrysquirrel.rocketmq.error.RocketException;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * ClassName: DefaultMessageListener
@@ -32,11 +31,10 @@ import lombok.extern.slf4j.Slf4j;
  * @author ThierrySquirrel
  * @since JDK 1.8
  */
-@Slf4j
 public class DefaultMessageListener extends AbstractRocketListener implements MessageListener {
 
     public DefaultMessageListener(MethodFactoryExecution methodFactoryExecution) {
-        super (methodFactoryExecution);
+        super(methodFactoryExecution);
     }
 
     /**
@@ -50,11 +48,10 @@ public class DefaultMessageListener extends AbstractRocketListener implements Me
      */
     @Override
     public Action consume(Message message, ConsumeContext context) {
-        log.info (">>>>message:{}>>>>", message);
         try {
-            super.getMethodFactoryExecution ().methodExecution (message.getBody ());
+            super.getMethodFactoryExecution().methodExecution(message.getBody());
         } catch (RocketException e) {
-            super.printErrorLog ();
+            super.printErrorLog();
             return Action.ReconsumeLater;
         }
         return Action.CommitMessage;

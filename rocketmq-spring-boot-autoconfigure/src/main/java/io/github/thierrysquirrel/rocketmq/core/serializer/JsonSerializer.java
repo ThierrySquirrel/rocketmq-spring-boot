@@ -22,7 +22,7 @@ import io.github.thierrysquirrel.json.util.JsonUtil;
 /**
  * ClassName: JsonSerializer
  * Description:
- * date: 2019/1/28
+ * date: 2026/1/28
  *
  * @author ThierrySquirrel
  * @since JDK 21
